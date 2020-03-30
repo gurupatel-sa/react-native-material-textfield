@@ -49,6 +49,7 @@ export default class TextField extends PureComponent {
     disabled: false,
     disabledLineType: 'dotted',
     disabledLineWidth: 1,
+    mandatoryFieldLabel:""
   };
 
   static propTypes = {
@@ -72,6 +73,7 @@ export default class TextField extends PureComponent {
     baseColor: PropTypes.string,
 
     label: PropTypes.string.isRequired,
+    mandatoryFieldLabel:PropTypes.string,
     title: PropTypes.string,
 
     characterRestriction: PropTypes.number,
@@ -352,6 +354,7 @@ export default class TextField extends PureComponent {
       containerStyle,
       inputContainerStyle: inputContainerStyleOverrides,
       clearTextOnFocus,
+      mandatoryFieldLabel,
       ...props
     } = this.props;
 
@@ -495,6 +498,7 @@ export default class TextField extends PureComponent {
       errored,
       restricted,
       style: labelTextStyle,
+      mandatoryFieldLabel:mandatoryFieldLabel
     };
 
     let counterProps = {
@@ -506,12 +510,14 @@ export default class TextField extends PureComponent {
       style: titleTextStyle,
     };
 
+    
+
     return (
       <View {...containerProps}>
         <Animated.View {...inputContainerProps}>
           {disabled && <Line {...lineProps} />}
 
-          <Label {...labelProps}>{label}</Label>
+          <Label {...labelProps} >{label}</Label>
 
           <View style={styles.row}>
             {this.renderAffix('prefix', active, focused)}

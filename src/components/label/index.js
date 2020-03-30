@@ -92,6 +92,7 @@ export default class Label extends PureComponent {
       active, 
       focused,
       animationDuration,
+      mandatoryFieldLabel,
       ...props
     } = this.props;
 
@@ -118,16 +119,21 @@ export default class Label extends PureComponent {
 
       color,
     };
+   
 
     let containerStyle = {
       position: 'absolute',
       top,
     };
+    console.log("label "+props.mandatoryFieldLabel)
 
     return (
       <Animated.View style={containerStyle}>
         <Animated.Text style={[style, textStyle]} {...props}>
           {children}
+          {this.props.mandatoryFieldLabel !== "" && 
+          <Animated.Text style={[style, {color:'red'}]} {...props}>{this.props.mandatoryFieldLabel}</Animated.Text>
+          }
         </Animated.Text>
       </Animated.View>
     );
